@@ -1,10 +1,18 @@
 import chalk from "chalk"
 import fs from "fs"
 
+function trataErro(erro){
+    throw new Error(chalk.red(erro.code, "não há arquivo no caminho"))
+}
+
 function pegaArquivo(arquivo){
-    
-    fs.readFile(arquivo, "utf-8", (_,texto) => {
-        console.log(chalk.green(texto))
+    const encoding = 'utf-8'
+    fs.readFile(arquivo, encoding, (erro,texto) => {
+        if(erro){
+            trataErro(erro)
+        }else{
+            console.log(chalk.green(texto))
+        }
     })
 }
 
