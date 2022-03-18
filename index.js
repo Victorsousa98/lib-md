@@ -4,7 +4,14 @@ import fs from "fs"
 function trataErro(erro){
     throw new Error(chalk.red(erro.code, "não há arquivo no caminho"))
 }
-
+async function pegaArquivo(arquivo){
+    try {
+        const texto = await fs.promises.readFile(arquivo, "utf-8")
+        console.log(chalk.green(texto))
+    } catch(erro){
+        trataErro(erro)
+    }
+}
 
 // function pegaArquivo(arquivo){
 //     fs.promises.readFile(arquivo, "utf-8")
